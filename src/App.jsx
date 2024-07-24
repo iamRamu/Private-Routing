@@ -9,8 +9,9 @@ export const store = createContext()
 
 const App = () => {
   const [likedCartIds, setLikedCartIds] = useState([])
+  const [token, setToken] = useState("")
   return(
-    <store.Provider value={{likedCartIds, setLikedCartIds}}>
+    <store.Provider value={{likedCartIds, setLikedCartIds, token, setToken}}>
       <div className='app-bg-container'>
           <BrowserRouter>
               <Routes>

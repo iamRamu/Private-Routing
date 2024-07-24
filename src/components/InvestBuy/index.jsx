@@ -1,9 +1,11 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import axios from 'axios'
 import './index.css'
 import InvestBuyItem from '../InvestBuyItem'
 import { FaSearch } from 'react-icons/fa'
 import { FaLocationCrosshairs } from "react-icons/fa6";
+import { store } from '../../App'
+import {BallTriangle} from 'react-loader-spinner'
 
 const InvestBuy = () => {
     const [sites, setSites] = useState(null)
@@ -12,14 +14,31 @@ const InvestBuy = () => {
     const [count, setCount] = useState(0);
     const [userSearch, setuserSearch] = useState("")
     const [specificSearch, setSpecificSearch] = useState("")
+    const {token, setToken} = useContext(store)
     // const apiUrl = "http://devapi.telosamerica.com/buypage?deafault=true&page=1&pageLimit=2&sorting=&search="
     useEffect(() => {
         const apiUrl = `http://devapi.telosamerica.com/buy?page=${page}&pageLimit=${pageLimit}&search=${specificSearch}`
         const countApiData = `http://devapi.telosamerica.com/buy?search=${specificSearch}&count=true`
-        const token = ""
+        const loginApiUrl = "http://devapi.telosamerica.com/user"
+        const options = {
+            method : "POST",
+            headers : {
+                'Content-Type' : 'application/json'
+            },
+            body : JSON.stringify({email : "karthikucr@yopmail.com", password : "Karthik@123"}),
+            
+        }
+        const getUserToken = async() => {
+            const response = await fetch(loginApiUrl, options)
+            const data = await response.json()
+            //console.log("getUserToken", data)
+            setToken(data.token)
+
+        }
+        getUserToken()
         const getSites = async() => {
             const response = await axios.get(apiUrl, {headers : {
-                Authorization : `Bearer ${token}`,
+                Authorization : `${token}`,
                 'Content-Type': 'application/json'
             }})
             const data = response.data.data
@@ -29,7 +48,7 @@ const InvestBuy = () => {
 
         const getSitesCount = async() => {
             const response = await axios.get(countApiData, {headers : {
-                Authorization : `Bearer ${token}`,
+                Authorization : `${token}`,
                 'Content-Type': 'application/json'
             }})
             //const data = response.data.data
@@ -38,7 +57,7 @@ const InvestBuy = () => {
             setCount(response.data.count)
         }
         getSitesCount()
-    },[pageLimit, page, specificSearch])
+    },[pageLimit, page, specificSearch, token])
 
     const toggleSelfLike = id => {
         const filteredSites = sites.map(eachFilterSite => {
@@ -73,9 +92,22 @@ const InvestBuy = () => {
             <div className='invest-buy-items-container'>
                 {sites && sites.map(eachSite => <InvestBuyItem siteDetailes={eachSite} key={eachSite._id} toggleSelfLike={toggleSelfLike}/>)}
             </div>
-            {sites &&
+            {sites ?
                 sites.length < count &&
                 <button className='invest-but-load-more-button' onClick={handlePageLimit}>Load More</button>
+                :
+                <div className='loader-container'>
+                    <BallTriangle
+                        height={100}
+                        width={100}
+                        radius={5}
+                        color="#4fa94d"
+                        ariaLabel="ball-triangle-loading"
+                        wrapperStyle={{}}
+                        wrapperClass=""
+                        visible={true}
+                    />
+                </div>
             }
             
         </div>

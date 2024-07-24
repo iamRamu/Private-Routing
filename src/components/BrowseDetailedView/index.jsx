@@ -1,25 +1,26 @@
-import {useEffect, useState } from 'react'
+import {useContext, useEffect, useState } from 'react'
 import './index.css'
 import axios from 'axios'
 import { useLocation, useNavigate} from 'react-router-dom'
 import { TiArrowBack } from "react-icons/ti";
+import { store } from '../../App';
+import {BallTriangle} from 'react-loader-spinner'
 
 const BrowseDetailedView = () => {
     const location = useLocation()
     const navigate = useNavigate()
     const {specificId} = location.state || {} // is a defensive programming technique that ensures the specificId is safely extracted from location.state without causing runtime errors if location.state is not defined.
     const [specificIdData, setSpecificIdData] = useState(null)
-    
+    const {token} = useContext(store)
     const apiUrl = `http://devapi.telosamerica.com/buy?id=${specificId}`
     useEffect(() => {
-        const token = ""
         if(specificId === undefined){
             navigate("/")
         }
         else{
             const getSpecificIdData = async() => {
                 const response = await axios.get(apiUrl, {headers : {
-                    Authorization : `Bearer ${token}`,
+                    Authorization : `${token}`,
                     'Content-Type' : 'application/json'
                 }})
                 const data = await response.data
@@ -27,7 +28,7 @@ const BrowseDetailedView = () => {
             }
             getSpecificIdData()
         } 
-    }, [specificId])
+    }, [specificId, token])
     // let image = specificIdData && specificIdData.images.length > 1 ? specificIdData.images[1] : specificIdData.images[0]
     let image 
     if(specificIdData){
@@ -36,8 +37,21 @@ const BrowseDetailedView = () => {
     return(
         <div className='browse-details-view-bg-container'>
             <div className='browse-detailed-view-img-container'>
-                {specificIdData && 
+                {specificIdData ? 
                     <img src={image} className='browse-detailed-view-img' alt="img"/>
+                    :
+                    <div className='loader-container'>
+                        <BallTriangle
+                            height={100}
+                            width={100}
+                            radius={5}
+                            color="#4fa94d"
+                            ariaLabel="ball-triangle-loading"
+                            wrapperStyle={{}}
+                            wrapperClass=""
+                            visible={true}
+                        />
+                    </div>
                 }
             </div>
             {specificIdData && (
