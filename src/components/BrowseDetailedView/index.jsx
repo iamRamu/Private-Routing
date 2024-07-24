@@ -196,7 +196,9 @@ const BrowseDetailedView = () => {
                     </div>
                 </div>
             )}
-            <button className='back-button' onClick={()=>navigate(-1)}><TiArrowBack/> Back</button>
+            {specificIdData &&
+                <button className='back-button' onClick={()=>navigate(-1)}><TiArrowBack/> Back</button>
+            }
         </div>
     )
 }
