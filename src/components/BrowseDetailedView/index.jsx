@@ -12,13 +12,14 @@ const BrowseDetailedView = () => {
     
     const apiUrl = `http://devapi.telosamerica.com/buy?id=${specificId}`
     useEffect(() => {
+        const token = ""
         if(specificId === undefined){
             navigate("/")
         }
         else{
             const getSpecificIdData = async() => {
                 const response = await axios.get(apiUrl, {headers : {
-                    Authorization : `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWU1NWQ3MzM3OTlkMzFhMWE5YzYzNGYiLCJlbWFpbCI6ImthcnRoaWt1Y3JAeW9wbWFpbC5jb20iLCJpYXQiOjE3MjEzNzk3NzksImV4cCI6MTcyMTk4NDU3OX0.MITjWmLAWyiq_4AEZeOmADbAw6EaF9FfSbMAyiDRyCg`,
+                    Authorization : `Bearer ${token}`,
                     'Content-Type' : 'application/json'
                 }})
                 const data = await response.data

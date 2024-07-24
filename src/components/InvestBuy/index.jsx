@@ -16,10 +16,10 @@ const InvestBuy = () => {
     useEffect(() => {
         const apiUrl = `http://devapi.telosamerica.com/buy?page=${page}&pageLimit=${pageLimit}&search=${specificSearch}`
         const countApiData = `http://devapi.telosamerica.com/buy?search=${specificSearch}&count=true`
-        
+        const token = ""
         const getSites = async() => {
             const response = await axios.get(apiUrl, {headers : {
-                Authorization : `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWU1NWQ3MzM3OTlkMzFhMWE5YzYzNGYiLCJlbWFpbCI6ImthcnRoaWt1Y3JAeW9wbWFpbC5jb20iLCJpYXQiOjE3MjEzNzk3NzksImV4cCI6MTcyMTk4NDU3OX0.MITjWmLAWyiq_4AEZeOmADbAw6EaF9FfSbMAyiDRyCg`,
+                Authorization : `Bearer ${token}`,
                 'Content-Type': 'application/json'
             }})
             const data = response.data.data
@@ -29,7 +29,7 @@ const InvestBuy = () => {
 
         const getSitesCount = async() => {
             const response = await axios.get(countApiData, {headers : {
-                Authorization : `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWU1NWQ3MzM3OTlkMzFhMWE5YzYzNGYiLCJlbWFpbCI6ImthcnRoaWt1Y3JAeW9wbWFpbC5jb20iLCJpYXQiOjE3MjEzNzk3NzksImV4cCI6MTcyMTk4NDU3OX0.MITjWmLAWyiq_4AEZeOmADbAw6EaF9FfSbMAyiDRyCg`,
+                Authorization : `Bearer ${token}`,
                 'Content-Type': 'application/json'
             }})
             //const data = response.data.data
