@@ -90,6 +90,7 @@
     .browse-details-view-main-container{
         flex-direction: column;
         /* border: solid green; */
+        
     }
     .browse-details-view-left-container{
         width: 95%;

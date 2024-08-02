@@ -7,6 +7,7 @@ import { store } from '../../App'
 const InvestBuyItem = props => {
     const {likedCartIds, setLikedCartIds} = useContext(store)
     //console.log("likedCartIds", likedCartIds)
+    
     const {siteDetailes, toggleSelfLike} = props
     const {_id, propertyID, city, propertyType, state, images, selfLike} = siteDetailes
     //console.log("images List", images)

@@ -131,6 +131,7 @@ const BrowseDetailedView = () => {
                                 <p>Amenities</p>
                                 <p className='strong'>--</p>
                             </div>
+                            
                         </div>
                         <div className='browse-detailed-view-right-container'>
                             <h2>Date Added</h2>

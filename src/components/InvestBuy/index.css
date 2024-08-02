@@ -60,6 +60,7 @@
     align-items: center;
     justify-content: center;
     min-height: 50vh;
+    
 }
 @media (min-width:320px) and (max-width:380px) {
     .search-container{

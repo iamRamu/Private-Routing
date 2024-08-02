@@ -55,6 +55,7 @@ const InvestBuy = () => {
             //setSites(page > 1 && sites ? [...sites, ...data] : data)
             //console.log("count", response.data.count)
             setCount(response.data.count)
+            
         }
         getSitesCount()
     },[pageLimit, page, specificSearch, token])
