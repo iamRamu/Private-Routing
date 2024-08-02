@@ -1,0 +1,50 @@
+.propery-bg-container{
+    max-width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+.property-details-container{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: space-between;
+}
+.property-info-heading{
+    font-size: 28px;
+}
+.property-fields-container{
+    display: flex;
+    flex-direction: column;
+    width: 48%;
+    font-family: Roboto;
+    margin-bottom: 20px;
+}
+
+.property-input-field{
+    height: 30px;
+    border: solid grey;
+    border-radius: 5px;
+    font-size: 20px;
+    padding: 5px;
+    padding-left: 10px;
+    outline: none;
+    
+}
+.property-label{
+    font-size: 25px;
+}
+.property-submit-button{
+    width: 90px;
+    display: flex;
+    align-self: center;
+    margin-top: 20px;
+    color: #ffffff;
+    background-color: rgba(240, 150, 14, 0.799);
+}
+@media (min-width : 320px) and (max-width : 767px) {
+    .property-fields-container{
+        width: 95%;
+    }
+}
