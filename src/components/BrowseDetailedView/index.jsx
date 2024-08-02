@@ -5,14 +5,17 @@ import { useLocation, useNavigate} from 'react-router-dom'
 import { TiArrowBack } from "react-icons/ti";
 import { store } from '../../App';
 import {BallTriangle} from 'react-loader-spinner'
+import Cookies from 'js-cookie'
 
 const BrowseDetailedView = () => {
     const location = useLocation()
     const navigate = useNavigate()
     const {specificId} = location.state || {} // is a defensive programming technique that ensures the specificId is safely extracted from location.state without causing runtime errors if location.state is not defined.
     const [specificIdData, setSpecificIdData] = useState(null)
-    const {token} = useContext(store)
-    const apiUrl = `http://devapi.telosamerica.com/buy?id=${specificId}`
+    //const {token} = useContext(store)
+    const token = Cookies.get("token")
+    //console.log("Detailed View token", token)
+    const apiUrl = `http://devapi.telosamerica.com/property?id=${specificId}`
     useEffect(() => {
         if(specificId === undefined){
             navigate("/")
@@ -65,11 +68,11 @@ const BrowseDetailedView = () => {
                             <h2 style={{marginBottom:"0px"}}>Details</h2>
                             <div className='each-feild'>
                                 <p>Title</p>
-                                <p className='strong'>--</p>
+                                <p className='strong'>{specificIdData.Title}</p>
                             </div>
                             <div className='each-feild'> 
                                 <p>Zip Code</p>
-                                <p className='strong'>--</p>
+                                <p className='strong'>{specificIdData.ZipCode}</p>
                             </div>
                             <div className='each-feild'> 
                                 <p>Property Type</p>
@@ -138,7 +141,7 @@ const BrowseDetailedView = () => {
                             <div className='empty-div'></div>
                             <div className='each-feild'> 
                                 <p>Asking Price ($)</p>
-                                <p className='strong'>--</p>
+                                <p className='strong'>{specificIdData.askingPrice}</p>
                             </div>
                             <div className='each-feild'> 
                                 <p>Investment Sub Type</p>

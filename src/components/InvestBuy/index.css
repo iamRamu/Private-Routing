@@ -60,10 +60,31 @@
     align-items: center;
     justify-content: center;
     min-height: 50vh;
+    width: 100vw;
+}
+.add-button{
+    margin-right: 20px;
+    background-color: rgb(0, 119, 255);
+    color: #ffffff;
+    font-family: Roboto;
+    width: 81px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 5px;
+}
+.add-button:focus{
+    outline: none;
 }
 @media (min-width:320px) and (max-width:380px) {
     .search-container{
         width: 80%;
+    }
+    .add-button{
+        margin-right: -10px;
+        margin-left: 10px;
+        font-size: 13px;
     }
 }
 @media (min-width:380px) and (max-width:470px) {

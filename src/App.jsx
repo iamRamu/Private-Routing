@@ -4,6 +4,7 @@ import InvestBuy from './components/InvestBuy'
 import BrowseDetailedView from './components/BrowseDetailedView'
 import NotFound from './components/NotFound'
 import { createContext, useState } from 'react'
+import EditProperty from './components/Property'
 
 export const store = createContext()
 
@@ -17,6 +18,7 @@ const App = () => {
               <Routes>
                   <Route path='/' element={<InvestBuy/>}/>
                   <Route path='/invest-buy' element={<BrowseDetailedView/>}/>
+                  <Route path='/edit-property' element={<EditProperty/>}/>
                   <Route path='*' element={<NotFound/>}/>
               </Routes>
           </BrowserRouter>
